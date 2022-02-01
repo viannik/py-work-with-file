@@ -3,6 +3,8 @@
 Implement function `create_report` 
 which will make a report using data from the market after a working day. 
 
+- Read [the guideline](https://github.com/mate-academy/py-task-guideline/blob/main/README.md) before start
+
 This method has two parameters:
 - `data_file_name: str` - you should read data from this file
 - `report_file_name: str` - you should write the result to this file
