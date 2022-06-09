@@ -26,6 +26,7 @@ jobs:
       - name: Run flake8
         run: flake8 app/
       - name: Run tests
+        timeout-minutes: 5
         run: pytest tests/
       - uses: mate-academy/auto-approve-action@v2
         if: ${{ github.event.pull_request && success() }}
