@@ -1,4 +1,7 @@
+from __future__ import annotations
 import os
+from types import TracebackType
+from typing import Optional, Type
 
 import pytest
 
@@ -6,13 +9,18 @@ from app.main import create_report
 
 
 class CleanUpFile:
-    def __init__(self, filename: str):
+    def __init__(self, filename: str) -> None:
         self.filename = filename
 
-    def __enter__(self):
+    def __enter__(self) -> CleanUpFile:
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> None:
         if os.path.exists(self.filename):
             os.remove(self.filename)
 
@@ -42,7 +50,9 @@ class CleanUpFile:
         ),
     ],
 )
-def test_create_report(data_file_name, report_file_name, expected_report):
+def test_create_report(
+    data_file_name: str, report_file_name: str, expected_report: str
+) -> None:
     create_report(data_file_name, report_file_name)
 
     with CleanUpFile(report_file_name):
